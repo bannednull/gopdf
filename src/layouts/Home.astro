@@ -13,6 +13,12 @@ const { title = 'GoPDF' } = Astro.props;
     <ClientRouter />
   </head>
   <body>
+    <nav class="container mx-auto mb-5 border-b px-0 py-4">
+      <h1 class="text-2xl font-medium">
+        📝 Go<span class="text-lg text-amber-400">PDF</span>
+      </h1>
+    </nav>
+
     <slot />
   </body>
 </html>

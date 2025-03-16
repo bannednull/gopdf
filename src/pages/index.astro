@@ -4,17 +4,11 @@ import { tools } from './data';
 ---
 
 <Home title="GoPDF">
-  <nav class="container mx-auto mb-5 border-b px-0 py-4">
-    <h1 class="text-2xl font-medium">
-      📝 Go<span class="text-lg text-amber-400">PDF</span>
-    </h1>
-  </nav>
-
   <div class="container mx-auto grid grid-cols-1 gap-4 md:grid-cols-3">
     {
       tools.map((item) => (
         <a href={`${item.page}`}>
-          <article class="group mt-1 rounded-lg bg-white p-8 shadow-sm">
+          <article class="group mt-1 rounded-lg bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
             <h3 class="mb-2 text-xl font-medium group-hover:text-amber-400">
               {item.name}
             </h3>

@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+    --color-border: hsl(var(--border));
+}
+
+@utility container {
+    margin-inline: auto;
+    @media (width >= 768px) {
+        max-width: 768px;
+    }
+    @media (width >= 1024px) {
+        max-width: 1024px;
+    }
+    @media (width >= 1124px) {
+        max-width: 1124px;
+    }
+}
+
+@layer base {
+    :root {
+        --border: 0 0% 89.8%;
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200);
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-gray-50;
+    }
+}

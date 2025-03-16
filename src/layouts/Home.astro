@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 const { title = 'GoPDF' } = Astro.props;
 ---
@@ -9,6 +10,7 @@ const { title = 'GoPDF' } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body>
     <slot />

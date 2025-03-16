@@ -1,7 +1,25 @@
 ---
 import Home from "../layouts/Home.astro";
+import { tools } from "./data";
 ---
 
 <Home>
-    <h1>GOPDF</h1>
+    <nav class="container mx-auto border-b mb-5 py-4 px-0">
+        <h1 class="text-2xl font-medium">
+            📝 Go<span class="text-amber-400 text-lg">PDF</span>
+        </h1>
+    </nav>
+
+    <div class="container mx-auto grid grid-cols-1 gap-4 md:grid-cols-3">
+        {
+            tools.map((item) => (
+                <div class="bg-white p-8 shadow-sm rounded-lg group">
+                    <h3 class="font-medium text-xl mb-2 group-hover:text-amber-400">
+                        {item.name}
+                    </h3>
+                    <p class="text-gray-400">{item.description}</p>
+                </div>
+            ))
+        }
+    </div>
 </Home>

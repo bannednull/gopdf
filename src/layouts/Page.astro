@@ -1,15 +1,20 @@
 ---
+import { slide } from 'astro:transitions';
 import FAQ from '../components/faq.astro';
 
 interface Props {
+  id: number;
   name?: string;
   description?: string;
 }
 
-const { name, description } = Astro.props;
+const { id, name, description } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 gap-6 md:grid-cols-5">
+<div
+  class="grid grid-cols-1 gap-6 md:grid-cols-5"
+  transition:name={`item-${id}`}
+>
   <div class="col-span-2">
     <h1 class="mb-2 text-3xl font-black">{name}</h1>
     <h2 class="text-gray-500">
@@ -22,7 +27,10 @@ const { name, description } = Astro.props;
     <FAQ />
   </div>
 
-  <div class="col-span-3 self-start rounded-lg bg-white p-6 shadow-sm">
+  <div
+    transition:animate={slide({ duration: 700 })}
+    class="col-span-3 self-start rounded-lg bg-white p-6 shadow-sm"
+  >
     <slot />
   </div>
 </div>

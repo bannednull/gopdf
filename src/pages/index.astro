@@ -8,7 +8,10 @@ import { tools } from './data';
     {
       tools.map((item) => (
         <a href={`${item.page}`}>
-          <article class="group mt-1 rounded-lg bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+          <article
+            transition:name={`item-${item.id}`}
+            class="group mt-1 rounded-lg bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+          >
             <h3 class="mb-2 text-xl font-medium group-hover:text-amber-400">
               {item.name}
             </h3>

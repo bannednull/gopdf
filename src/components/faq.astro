@@ -1,0 +1,45 @@
+---
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQ[] = [
+  {
+    question: '¿Necesito registrarme?',
+    answer:
+      'No, puedes usar nuestras funciones básicas sin necesidad de registrarte. Sin embargo, si deseas acceder a funciones avanzadas, te recomendamos crear una cuenta.',
+  },
+  {
+    question: '¿Qué formatos de archivo puedo subir?',
+    answer:
+      'Actualmente, solo soportamos archivos PDF, pero estamos trabajando para agregar soporte para otros formatos en el futuro.',
+  },
+  {
+    question: '¿Cuánto tiempo se mantienen mis archivos subidos?',
+    answer:
+      'Los archivos subidos se mantienen disponibles para su descarga durante 1 hora después de completar el procesamiento. Después de este tiempo, se eliminan automáticamente para garantizar tu privacidad y seguridad.',
+  },
+  {
+    question: '¿GoPDF es gratuito?',
+    answer:
+      'Ofrecemos una versión gratuita con funciones limitadas. Si necesitas acceso a funciones avanzadas o procesamiento de archivos más grandes, ofrecemos planes premium.',
+  },
+];
+---
+
+<div>
+  {
+    faqs.map((faq) => (
+      <details class="group">
+        <summary class="flex cursor-pointer items-center justify-between border-b py-3 last:border-none">
+          {faq.question}
+          <span class="text-2xl transition-transform duration-200 group-open:rotate-45">
+            +
+          </span>
+        </summary>
+        <p class="border-t border-gray-100 py-2 text-gray-600">{faq.answer}</p>
+      </details>
+    ))
+  }
+</div>

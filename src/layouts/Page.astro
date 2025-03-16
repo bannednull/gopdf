@@ -1,4 +1,6 @@
 ---
+import FAQ from '../components/faq.astro';
+
 interface Props {
   name?: string;
   description?: string;
@@ -7,15 +9,20 @@ interface Props {
 const { name, description } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 gap-5 md:grid-cols-5">
+<div class="grid grid-cols-1 gap-6 md:grid-cols-5">
   <div class="col-span-2">
-    <h1 class="mb-1 text-3xl font-black">{name}</h1>
+    <h1 class="mb-2 text-3xl font-black">{name}</h1>
     <h2 class="text-gray-500">
       {description}
     </h2>
+
+    <hr class="my-6" />
+
+    <strong class="block text-xl font-medium">Preguntas frecuentes</strong>
+    <FAQ />
   </div>
 
-  <div class="col-span-3 rounded-lg bg-white shadow-sm">
+  <div class="col-span-3 self-start rounded-lg bg-white p-6 shadow-sm">
     <slot />
   </div>
 </div>

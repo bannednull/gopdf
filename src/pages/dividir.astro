@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Home.astro';
+import { tools } from './data';
+
+const tool = tools.find((item) => item.id === 2);
+---
+
+<Layout>
+  <div class="container mx-auto">
+    <h1 class="mb-1 text-3xl font-black">{tool?.name}</h1>
+    <h2 class="text-gray-500">
+      {tool?.description}
+    </h2>
+  </div>
+</Layout>

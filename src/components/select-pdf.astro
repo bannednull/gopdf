@@ -1,0 +1,79 @@
+---
+interface Props {
+  id: number;
+}
+
+const { id } = Astro.props;
+---
+
+<select-pdf data-id={id}>
+  <label
+    class="block w-full rounded-lg border border-amber-600 bg-linear-to-tr from-amber-600 to-amber-400 p-2 text-center text-xl font-medium text-white"
+    for="pdf"
+  >
+    Seleccionar archivo PDF
+    <input class="hidden" type="file" id="pdf" accept="application/pdf" />
+  </label>
+
+  <canvas
+    class="mx-auto mt-4 hidden w-1/3 rounded-lg border border-dashed"
+    id={`preview-${id}`}></canvas>
+</select-pdf>
+
+<script>
+  import * as pdfjsLib from 'pdfjs-dist';
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    '/node_modules/pdfjs-dist/build/pdf.worker.mjs';
+
+  class SelectPdf extends HTMLElement {
+    connectedCallback() {
+      const pdfInput = this.querySelector('#pdf') as HTMLInputElement;
+      const canvas = this.querySelector(
+        `#preview-${this.dataset.id}`
+      ) as HTMLCanvasElement;
+
+      pdfInput.addEventListener('change', async (e) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (file && file.type === 'application/pdf') {
+          const fileReader = new FileReader();
+          fileReader.onload = async function () {
+            const result = this.result;
+            if (!(result instanceof ArrayBuffer)) {
+              console.error('Resultado del FileReader no es un ArrayBuffer');
+              return;
+            }
+            const typedarray = new Uint8Array(result);
+
+            try {
+              const loadingTask = pdfjsLib.getDocument({ data: typedarray });
+              const pdf = await loadingTask.promise;
+              const numPages = pdf.numPages;
+              if (!canvas) {
+                return null;
+              }
+              const context = canvas.getContext('2d');
+              if (!context) {
+                return null;
+              }
+
+              const page = await pdf.getPage(1);
+              const viewport = page.getViewport({ scale: 0.7 });
+
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              canvas.classList.remove('hidden');
+
+              await page.render({ canvasContext: context, viewport }).promise;
+            } catch (error) {
+              console.error('Error al cargar el PDF:', error);
+            }
+          };
+          fileReader.readAsArrayBuffer(file);
+        }
+      });
+    }
+  }
+
+  customElements.define('select-pdf', SelectPdf);
+</script>

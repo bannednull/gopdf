@@ -1,6 +1,7 @@
 ---
 import { slide } from 'astro:transitions';
 import FAQ from '../components/faq.astro';
+import SelectPDF from '../components/select-pdf.astro';
 
 interface Props {
   id: number;
@@ -31,6 +32,7 @@ const { id, name, description } = Astro.props;
     transition:animate={slide({ duration: 700 })}
     class="col-span-3 self-start rounded-lg bg-white p-6 shadow-sm"
   >
+    <SelectPDF id={id} />
     <slot />
   </div>
 </div>
